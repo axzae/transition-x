@@ -18,10 +18,6 @@
 
 package `in`.arunkumarsampath.transitionx.sample.home.transitionsamples
 
-
-import `in`.arunkumarsampath.transitionx.prepareTransition
-import `in`.arunkumarsampath.transitionx.sample.R
-import `in`.arunkumarsampath.transitionx.sample.extensions.dpToPx
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
@@ -30,10 +26,14 @@ import android.widget.ImageView
 import androidx.core.view.updateLayoutParams
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.layout_change_image_content.*
+import `in`.arunkumarsampath.transitionx.prepareTransition
+import `in`.arunkumarsampath.transitionx.sample.R
+import `in`.arunkumarsampath.transitionx.sample.databinding.LayoutChangeImageContentBinding
+import `in`.arunkumarsampath.transitionx.sample.utils.dpToPx
 
 class ChangeImageTransitionFragment : BaseSampleFragment() {
 
+    private lateinit var binding: LayoutChangeImageContentBinding
     override val contentLayoutResource = R.layout.layout_change_image_content
     override val titleRes = R.string.change_image_transition
 
@@ -44,32 +44,32 @@ class ChangeImageTransitionFragment : BaseSampleFragment() {
     @SuppressLint("RtlHardcoded")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = LayoutChangeImageContentBinding.bind(viewStubRoot)
         setupMeow()
         initClickListeners()
     }
 
     private fun setupMeow() {
-        frameLayout.post {
-            Glide.with(userIconView)
-                    .load(R.drawable.cute_cat)
-                    .apply(RequestOptions().override(frameLayout.width))
-                    .into(userIconView)
+        binding.frameLayout.post {
+            Glide.with(binding.userIconView)
+                .load(R.drawable.cute_cat)
+                .apply(RequestOptions().override(binding.frameLayout.width))
+                .into(binding.userIconView)
         }
     }
 
     private fun initClickListeners() {
-        fab.setOnClickListener {
-
-            frameLayout.prepareTransition {
+        binding.fab.setOnClickListener {
+            binding.frameLayout.prepareTransition {
                 moveResize()
                 changeImage()
-                +userIconView
+                +binding.userIconView
             }
 
-            with(userIconView) {
+            with(binding.userIconView) {
                 if (toggle) {
                     updateLayoutParams<FrameLayout.LayoutParams> {
-                        height = frameLayout.height / 2
+                        height = binding.frameLayout.height / 2
                         width = FrameLayout.LayoutParams.MATCH_PARENT
                     }
                     scaleType = ImageView.ScaleType.CENTER_CROP

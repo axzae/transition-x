@@ -9,10 +9,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import `in`.arunkumarsampath.transitionx.prepareTransition
 import `in`.arunkumarsampath.transitionx.sample.R
-import kotlinx.android.synthetic.main.layout_change_color_content.*
+import `in`.arunkumarsampath.transitionx.sample.databinding.LayoutChangeColorContentBinding
 
 class ChangeColorFragment : BaseSampleFragment() {
 
+    private lateinit var binding: LayoutChangeColorContentBinding
     override val contentLayoutResource = R.layout.layout_change_color_content
     override val titleRes = R.string.change_color_transition
 
@@ -23,25 +24,26 @@ class ChangeColorFragment : BaseSampleFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = LayoutChangeColorContentBinding.bind(viewStubRoot)
         setupHeaderImage()
         initClickListeners()
     }
 
     private fun setupHeaderImage() {
-        Glide.with(imageView)
+        Glide.with(binding.imageView)
             .load(R.drawable.ic_dog_cute)
             .transition(withCrossFade())
-            .into(imageView)
+            .into(binding.imageView)
     }
 
     private fun initClickListeners() {
-        fab.setOnClickListener {
-            frameLayout.prepareTransition {
-                +textView
+        binding.fab.setOnClickListener {
+            binding.frameLayout.prepareTransition {
+                +binding.textView
                 changeColor()
                 duration = 1000
             }
-            with(textView) {
+            with(binding.textView) {
                 if (toggle) {
                     background = brownDrawable
                     setTextColor(Color.WHITE)

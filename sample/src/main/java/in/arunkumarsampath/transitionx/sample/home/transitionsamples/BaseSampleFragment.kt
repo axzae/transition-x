@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
-import androidx.core.app.Fragment
-import `in`.arunkumarsampath.transitionx.sample.R
-import kotlinx.android.synthetic.main.fragment_base_sample_transition.*
+import androidx.fragment.app.Fragment
+import `in`.arunkumarsampath.transitionx.sample.databinding.FragmentBaseSampleTransitionBinding
 
 abstract class BaseSampleFragment : Fragment() {
+
+    private lateinit var binding: FragmentBaseSampleTransitionBinding
+    lateinit var viewStubRoot: View // get() = binding.layoutStub.rootView
 
     @get:LayoutRes
     abstract val contentLayoutResource: Int
@@ -18,18 +20,17 @@ abstract class BaseSampleFragment : Fragment() {
     @get:StringRes
     abstract val titleRes: Int
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ) = inflater.inflate(R.layout.fragment_base_sample_transition, container, false)!!
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentBaseSampleTransitionBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        toolbar.setTitle(titleRes)
-        with(layoutStub) {
+        binding.toolbar.setTitle(titleRes)
+        with(binding.layoutStub) {
             layoutResource = contentLayoutResource
-            inflate()
+            viewStubRoot = inflate()
         }
     }
 }

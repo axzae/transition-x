@@ -170,22 +170,22 @@
         app:layout_constraintGuide_end="20dp" />
 
 
-    <!--<android.support.constraint.Group
-        android:id="@+id/textGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="aboutText,searchText,likesText,homeText"
-        tools:layout_editor_absoluteX="16dp"
-        tools:visibility="gone" />
+<!--    <androidx.constraintlayout.widget.Group-->
+<!--        android:id="@+id/textGroup"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:visibility="gone"-->
+<!--        app:constraint_referenced_ids="aboutText,searchText,likesText,homeText"-->
+<!--        tools:layout_editor_absoluteX="16dp"-->
+<!--        tools:visibility="gone" />-->
 
-    <android.support.constraint.Group
-        android:id="@+id/bgGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="aboutBg,searchBg,likesBg,homeBg"
-        tools:layout_editor_absoluteX="16dp"
-        tools:visibility="visible" />-->
+<!--    <androidx.constraintlayout.widget.Group-->
+<!--        android:id="@+id/bgGroup"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:visibility="gone"-->
+<!--        app:constraint_referenced_ids="aboutBg,searchBg,likesBg,homeBg"-->
+<!--        tools:layout_editor_absoluteX="16dp"-->
+<!--        tools:visibility="visible" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

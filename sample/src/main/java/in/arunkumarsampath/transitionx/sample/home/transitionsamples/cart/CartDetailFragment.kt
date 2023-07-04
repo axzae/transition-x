@@ -5,20 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.Fragment
 import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import `in`.arunkumarsampath.transitionx.sample.R
-import `in`.arunkumarsampath.transitionx.sample.util.glide.GlideApp
+import `in`.arunkumarsampath.transitionx.sample.databinding.FragmentCartDetailContentBinding
+import `in`.arunkumarsampath.transitionx.sample.utils.GlideApp
 import `in`.arunkumarsampath.transitionx.transitionSet
-import kotlinx.android.synthetic.main.fragment_cart_detail_content.*
 
 class CartDetailFragment : Fragment() {
 
-    private val cartItem by lazy { CartDetailFragmentArgs.fromBundle(arguments!!).cartItem }
+    private lateinit var binding: FragmentCartDetailContentBinding
+    private val cartItem by lazy { CartDetailFragmentArgs.fromBundle(requireArguments()).cartItem }
 
     private fun applyTransition() {
         sharedElementEnterTransition = transitionSet {
@@ -52,11 +52,10 @@ class CartDetailFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ) = inflater.inflate(R.layout.fragment_cart_detail_content, container, false)!!
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentCartDetailContentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,16 +70,16 @@ class CartDetailFragment : Fragment() {
 
     private fun setupViews() {
         ViewCompat.setTransitionName(
-            cartContentPreview,
+            binding.cartContentPreview,
             cartItem.cartImageTransitionName(),
         )
 
-        with(cartItemName) {
+        with(binding.cartItemName) {
             text = cartItem.name
             ViewCompat.setTransitionName(this, cartItem.name)
         }
 
-        with(cartItemPrice) {
+        with(binding.cartItemPrice) {
             text = cartItem.price
             ViewCompat.setTransitionName(this, cartItem.price)
         }
@@ -113,6 +112,6 @@ class CartDetailFragment : Fragment() {
                         return false
                     }
                 },
-            ).into(cartContentPreview)
+            ).into(binding.cartContentPreview)
     }
 }

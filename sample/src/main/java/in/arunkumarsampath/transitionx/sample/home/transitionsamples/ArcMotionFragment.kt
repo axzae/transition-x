@@ -11,11 +11,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import `in`.arunkumarsampath.transitionx.prepareTransition
 import `in`.arunkumarsampath.transitionx.sample.R
-import `in`.arunkumarsampath.transitionx.sample.extensions.dpToPx
-import kotlinx.android.synthetic.main.layout_arc_motion_content.*
+import `in`.arunkumarsampath.transitionx.sample.databinding.LayoutArcMotionContentBinding
+import `in`.arunkumarsampath.transitionx.sample.utils.dpToPx
 
 class ArcMotionFragment : BaseSampleFragment() {
 
+    private lateinit var binding: LayoutArcMotionContentBinding
     override val contentLayoutResource = R.layout.layout_arc_motion_content
     override val titleRes = R.string.arc_motion_transition
 
@@ -24,27 +25,28 @@ class ArcMotionFragment : BaseSampleFragment() {
     @SuppressLint("RtlHardcoded")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = LayoutArcMotionContentBinding.bind(viewStubRoot)
         setupMeow()
         initClickListeners()
     }
 
     private fun setupMeow() {
-        Glide.with(userIconView)
+        Glide.with(binding.userIconView)
             .load(R.drawable.cute_cat)
             .apply(RequestOptions().circleCrop())
-            .into(userIconView)
+            .into(binding.userIconView)
     }
 
     private fun initClickListeners() {
-        fab.setOnClickListener {
-            frameLayout.prepareTransition {
+        binding.fab.setOnClickListener {
+            binding.frameLayout.prepareTransition {
                 moveResize {
                     pathMotion = ArcMotion()
-                    +userIconView
+                    +binding.userIconView
                 }
             }
 
-            with(userIconView) {
+            with(binding.userIconView) {
                 if (toggle) {
                     updateLayoutParams<FrameLayout.LayoutParams> {
                         height = context.dpToPx(112.0)
@@ -55,7 +57,7 @@ class ArcMotionFragment : BaseSampleFragment() {
                     updateLayoutParams<FrameLayout.LayoutParams> {
                         height = context.dpToPx(56.0)
                         width = context.dpToPx(56.0)
-                        gravity = Gravity.START or Gravity.LEFT or Gravity.CENTER_VERTICAL
+                        gravity = Gravity.START or Gravity.START or Gravity.CENTER_VERTICAL
                     }
                 }
                 toggle = !toggle

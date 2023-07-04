@@ -3,10 +3,10 @@ package `in`.arunkumarsampath.transitionx.sample.transition.color.changecardcolo
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.res.ColorStateList
-import com.google.android.material.card.MaterialCardView
 import android.view.ViewGroup
 import androidx.transition.Transition
 import androidx.transition.TransitionValues
+import com.google.android.material.card.MaterialCardView
 import `in`.arunkumarsampath.transitionx.evaluator.ArgbEvaluator
 
 /**

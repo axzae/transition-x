@@ -4,22 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.Fragment
+import androidx.fragment.app.Fragment
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import `in`.arunkumarsampath.transitionx.sample.R
+import `in`.arunkumarsampath.transitionx.sample.databinding.FragmentHomeBinding
 import `in`.arunkumarsampath.transitionx.sample.home.adapter.SampleItemsAdapter
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class MainFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View? = inflater.inflate(R.layout.fragment_home, container, false)
+    private lateinit var binding: FragmentHomeBinding
+    private val adapter = SampleItemsAdapter()
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,10 +33,10 @@ class MainFragment : Fragment() {
             flexDirection = FlexDirection.ROW
             alignItems = AlignItems.STRETCH
         }
-        sampleRecyclerView.layoutManager = flexBoxLayoutManager
-        with(sampleRecyclerView) {
+        binding.sampleRecyclerView.layoutManager = flexBoxLayoutManager
+        with(binding.sampleRecyclerView) {
             layoutManager = flexBoxLayoutManager
-            adapter = SampleItemsAdapter()
+            adapter = this@MainFragment.adapter
         }
     }
 }

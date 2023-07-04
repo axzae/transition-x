@@ -1,27 +1,29 @@
 package `in`.arunkumarsampath.transitionx.sample.home.transitionsamples.cart
 
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.NO_POSITION
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat.setTransitionName
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.navOptions
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import `in`.arunkumarsampath.transitionx.sample.R
-import `in`.arunkumarsampath.transitionx.sample.extensions.inflate
-import `in`.arunkumarsampath.transitionx.sample.util.glide.GlideApp
+import `in`.arunkumarsampath.transitionx.sample.databinding.LayoutCartListItemTemplateBinding
+import `in`.arunkumarsampath.transitionx.sample.utils.GlideApp
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.layout_cart_list_item_template.*
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Random
 
 class CartAdapter : RecyclerView.Adapter<CartAdapter.CartItemViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         itemType: Int,
-    ) = CartItemViewHolder.create(parent)
+    ): CartItemViewHolder {
+        val binding = LayoutCartListItemTemplateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CartItemViewHolder(binding)
+    }
 
     override fun getItemCount() = CART_ITEMS.size
 
@@ -30,7 +32,9 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartItemViewHolder>() {
         position: Int,
     ) = holder.bindCartItem(CART_ITEMS[position])
 
-    class CartItemViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class CartItemViewHolder(private val binding: LayoutCartListItemTemplateBinding) : RecyclerView.ViewHolder(binding.root), LayoutContainer {
+
+        override val containerView: View get() = binding.root
 
         init {
             with(containerView) {
@@ -44,35 +48,28 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartItemViewHolder>() {
 
         private fun View.navigateToCartDetail() {
             val cartItem = CART_ITEMS[adapterPosition]
-            setTransitionName(cartContentPreview, cartItem.cartImageTransitionName())
-            setTransitionName(cartItemName, cartItem.name)
-            setTransitionName(cartPrice, cartItem.price)
+            setTransitionName(binding.cartContentPreview, cartItem.cartImageTransitionName())
+            setTransitionName(binding.cartItemName, cartItem.name)
+            setTransitionName(binding.cartPrice, cartItem.price)
             findNavController().navigate(
                 R.id.cartDetailFragment,
-                CartDetailFragmentArgs
-                    .Builder(cartItem)
-                    .build()
-                    .toBundle(),
+                CartDetailFragmentArgs(cartItem).toBundle(),
                 navOptions {
                 },
                 FragmentNavigator.Extras.Builder().run {
-                    addSharedElement(cartItemName, cartItem.name)
-                    addSharedElement(cartPrice, cartItem.price)
-                    addSharedElement(cartContentPreview, cartItem.cartImageTransitionName())
+                    addSharedElement(binding.cartItemName, cartItem.name)
+                    addSharedElement(binding.cartPrice, cartItem.price)
+                    addSharedElement(binding.cartContentPreview, cartItem.cartImageTransitionName())
                     build()
                 },
             )
         }
 
         fun bindCartItem(cartItem: CartItem) {
-            GlideApp.with(containerView).load(cartItem.drawableRes).into(cartContentPreview)
-            cartItemName.text = cartItem.name
-            cartPrice.text = cartItem.price
-            cartItemStatus.text = cartItem.status
-        }
-
-        companion object {
-            fun create(parent: ViewGroup) = CartItemViewHolder(parent.inflate(R.layout.layout_cart_list_item_template))
+            GlideApp.with(containerView).load(cartItem.drawableRes).into(binding.cartContentPreview)
+            binding.cartItemName.text = cartItem.name
+            binding.cartPrice.text = cartItem.price
+            binding.cartItemStatus.text = cartItem.status
         }
     }
 

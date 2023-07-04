@@ -20,8 +20,8 @@
             android:layout_margin="4dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:tint="@color/colorPrimary"
-            app:srcCompat="@drawable/ic_satisfied" />
+            app:srcCompat="@drawable/ic_satisfied"
+            app:tint="@color/colorPrimary" />
 
         <TextView
             android:id="@+id/helloText"

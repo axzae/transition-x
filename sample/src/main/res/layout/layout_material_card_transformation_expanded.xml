@@ -214,7 +214,7 @@
         app:layout_constraintStart_toStartOf="@id/left25Guideline"
         app:layout_constraintTop_toBottomOf="@+id/metamorphosisDesc2Container" />
 
-    <android.support.design.button.MaterialButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/collapseButton"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"

@@ -1,16 +1,30 @@
 package `in`.arunkumarsampath.transitionx.sample.home.transitionsamples
 
-import android.graphics.Color.*
+import android.graphics.Color.BLACK
+import android.graphics.Color.BLUE
+import android.graphics.Color.CYAN
+import android.graphics.Color.DKGRAY
+import android.graphics.Color.GRAY
+import android.graphics.Color.GREEN
+import android.graphics.Color.LTGRAY
+import android.graphics.Color.MAGENTA
+import android.graphics.Color.RED
+import android.graphics.Color.WHITE
+import android.graphics.Color.YELLOW
+import android.graphics.Color.blue
+import android.graphics.Color.green
+import android.graphics.Color.red
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.ColorInt
 import `in`.arunkumarsampath.transitionx.prepareTransition
 import `in`.arunkumarsampath.transitionx.sample.R
+import `in`.arunkumarsampath.transitionx.sample.databinding.LayoutCustomTransitionContentBinding
 import `in`.arunkumarsampath.transitionx.sample.transition.color.changecardcolor.ChangeCardColor
-import kotlinx.android.synthetic.main.layout_custom_transition_content.*
 
 class CustomTransitionFragment : BaseSampleFragment() {
 
+    private lateinit var binding: LayoutCustomTransitionContentBinding
     override val contentLayoutResource = R.layout.layout_custom_transition_content
     override val titleRes = R.string.sample_custom_transition
 
@@ -30,21 +44,22 @@ class CustomTransitionFragment : BaseSampleFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fab.setOnClickListener {
+        binding = LayoutCustomTransitionContentBinding.bind(viewStubRoot)
+        binding.fab.setOnClickListener {
             val color = colors.shuffled().first()
 
-            constraintLayout.prepareTransition {
+            binding.constraintLayout.prepareTransition {
                 customTransition<ChangeCardColor> {
-                    +colorChangeCardView
+                    +binding.colorChangeCardView
                 }
                 changeColor {
-                    +colorChangeTextView
+                    +binding.colorChangeTextView
                 }
                 duration = 1000
             }
 
-            colorChangeCardView.setCardBackgroundColor(color)
-            colorChangeTextView.setTextColor(calcForegroundWhiteOrBlack(color))
+            binding.colorChangeCardView.setCardBackgroundColor(color)
+            binding.colorChangeTextView.setTextColor(calcForegroundWhiteOrBlack(color))
         }
     }
 

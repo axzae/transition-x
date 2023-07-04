@@ -18,36 +18,37 @@
 
 package `in`.arunkumarsampath.transitionx.sample.home.transitionsamples
 
-import `in`.arunkumarsampath.transitionx.prepareTransition
-import `in`.arunkumarsampath.transitionx.sample.R
-import `in`.arunkumarsampath.transitionx.sample.extensions.toggleGone
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.layout_snackbar_content.*
-
+import `in`.arunkumarsampath.transitionx.prepareTransition
+import `in`.arunkumarsampath.transitionx.sample.R
+import `in`.arunkumarsampath.transitionx.sample.databinding.LayoutSnackbarContentBinding
+import `in`.arunkumarsampath.transitionx.sample.utils.toggleGone
 
 class SnackBarFragment : BaseSampleFragment() {
 
+    private lateinit var binding: LayoutSnackbarContentBinding
     override val contentLayoutResource = R.layout.layout_snackbar_content
     override val titleRes = R.string.snackbar
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = LayoutSnackbarContentBinding.bind(viewStubRoot)
         bindListeners()
     }
 
     private fun bindListeners() {
-        fab.setOnClickListener {
-            snackbarConstraintLayout.prepareTransition {
+        binding.fab.setOnClickListener {
+            binding.snackbarConstraintLayout.prepareTransition {
                 moveResize {
-                    +fab
+                    +binding.fab
                 }
                 slide {
-                    +snackbarMessage
+                    +binding.snackbarMessage
                 }
                 ease { decelerateEasing }
             }
-            snackbarMessage.toggleGone()
+            binding.snackbarMessage.toggleGone()
         }
     }
 }

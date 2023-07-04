@@ -2,13 +2,14 @@ package `in`.arunkumarsampath.transitionx.sample.home.transitionsamples
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.animation.FastOutLinearInInterpolator
+import androidx.interpolator.view.animation.FastOutLinearInInterpolator
 import `in`.arunkumarsampath.transitionx.prepareTransition
 import `in`.arunkumarsampath.transitionx.sample.R
-import kotlinx.android.synthetic.main.layout_scale_rotate_content.*
+import `in`.arunkumarsampath.transitionx.sample.databinding.LayoutScaleRotateContentBinding
 
 class ScaleRotateFragment : BaseSampleFragment() {
 
+    private lateinit var binding: LayoutScaleRotateContentBinding
     override val contentLayoutResource = R.layout.layout_scale_rotate_content
     override val titleRes = R.string.scale_rotate_transition
 
@@ -16,15 +17,16 @@ class ScaleRotateFragment : BaseSampleFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fab.setOnClickListener {
-            constraintLayout.prepareTransition {
+        binding = LayoutScaleRotateContentBinding.bind(viewStubRoot)
+        binding.fab.setOnClickListener {
+            binding.constraintLayout.prepareTransition {
                 scaleRotate {
-                    +arrowIconView
+                    +binding.arrowIconView
                     interpolator = FastOutLinearInInterpolator()
                 }
             }
 
-            with(arrowIconView) {
+            with(binding.arrowIconView) {
                 if (toggle) {
                     scaleY = 2F
                     scaleX = 2F
