@@ -1,7 +1,6 @@
 package `in`.arunkumarsampath.transitionx.sample
 
 import android.app.Application
-import com.hannesdorfmann.adapterdelegates3.BuildConfig
 import timber.log.Timber
 
 class TransitionSample : Application() {

@@ -64,7 +64,7 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.google.android.flexbox:flexbox:3.0.0")
 
-    implementation("com.hannesdorfmann:adapterdelegates3:3.0.1")
+    implementation("com.hannesdorfmann:adapterdelegates4:4.3.2")
     implementation("com.jakewharton.timber:timber:5.0.1")
     implementation("com.github.bumptech.glide:glide:4.13.2")
     kapt("com.github.bumptech.glide:compiler:4.13.2")

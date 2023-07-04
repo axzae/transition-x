@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager
 import `in`.arunkumarsampath.transitionx.sample.R
 import `in`.arunkumarsampath.transitionx.sample.home.adapter.delegates.HeaderItemDelegate
 import `in`.arunkumarsampath.transitionx.sample.home.adapter.delegates.SampleTransitionItemDelegate

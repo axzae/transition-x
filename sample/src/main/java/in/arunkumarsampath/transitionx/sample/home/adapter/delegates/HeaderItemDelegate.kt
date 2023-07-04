@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.hannesdorfmann.adapterdelegates3.AbsListItemAdapterDelegate
+import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import `in`.arunkumarsampath.transitionx.sample.databinding.LayoutHeaderItemTemplateBinding
 import `in`.arunkumarsampath.transitionx.sample.home.adapter.SampleItem
 import kotlinx.android.extensions.LayoutContainer

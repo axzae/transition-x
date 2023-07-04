@@ -34,6 +34,6 @@ android {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.21")
-    implementation("androidx.transition:transition:1.0.0")
+    implementation("androidx.transition:transition:1.4.1")
     implementation("androidx.interpolator:interpolator:1.0.0")
 }

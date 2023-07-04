@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
-import com.hannesdorfmann.adapterdelegates3.AbsListItemAdapterDelegate
+import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 import `in`.arunkumarsampath.transitionx.sample.databinding.LayoutSampleItemNameTemplateBinding
 import `in`.arunkumarsampath.transitionx.sample.home.adapter.SampleItem
 import kotlinx.android.extensions.LayoutContainer

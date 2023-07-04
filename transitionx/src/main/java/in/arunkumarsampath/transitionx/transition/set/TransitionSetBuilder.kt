@@ -4,14 +4,22 @@ package `in`.arunkumarsampath.transitionx.transition.set
 
 import android.view.View
 import android.widget.ImageView
-import androidx.transition.*
+import androidx.transition.Fade
+import androidx.transition.Transition
+import androidx.transition.TransitionSet
 import androidx.transition.TransitionSet.ORDERING_SEQUENTIAL
 import androidx.transition.TransitionSet.ORDERING_TOGETHER
 import `in`.arunkumarsampath.transitionx.transition.TransitionBuilder
 import `in`.arunkumarsampath.transitionx.transition.changecolor.ChangeColor
 import `in`.arunkumarsampath.transitionx.transition.changetext.ChangeText
 import `in`.arunkumarsampath.transitionx.transition.changetext.ChangeTextBuilder
-import `in`.arunkumarsampath.transitionx.transition.common.*
+import `in`.arunkumarsampath.transitionx.transition.common.ChangeBoundsBuilder
+import `in`.arunkumarsampath.transitionx.transition.common.ChangeClipBoundsBuilder
+import `in`.arunkumarsampath.transitionx.transition.common.ChangeColorBuilder
+import `in`.arunkumarsampath.transitionx.transition.common.ChangeImageBuilder
+import `in`.arunkumarsampath.transitionx.transition.common.ChangeScrollBuilder
+import `in`.arunkumarsampath.transitionx.transition.common.ExplodeBuilder
+import `in`.arunkumarsampath.transitionx.transition.common.ScaleRotateBuilder
 import `in`.arunkumarsampath.transitionx.transition.fade.FadeBuilder
 import `in`.arunkumarsampath.transitionx.transition.fade.FadeMode
 import `in`.arunkumarsampath.transitionx.transition.slide.SlideBuilder
@@ -63,7 +71,7 @@ open class TransitionSetBuilder<T : TransitionSet>(transitionSet: T) : Transitio
      *
      * @see [TransitionSet.getTransitionAt]
      */
-    inline operator fun get(index: Int): Transition = transition.getTransitionAt(index)
+    inline operator fun get(index: Int): Transition = transition.getTransitionAt(index)!!
 
     /**
      * Create another [TransitionSet] and add it to this transition set. The block [setBuilder]
