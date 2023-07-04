@@ -1,19 +1,3 @@
-/*
- * Copyright 2018 Arunkumar
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 object Plugins {
     const val kotlinAndroid = "kotlin-android"
     const val kotlinAndroidExt = "kotlin-android-extensions"
@@ -23,27 +7,26 @@ object Plugins {
     const val jfrogBintay = "com.jfrog.bintray"
     const val dokka = "org.jetbrains.dokka-android"
 }
-
-object BuildDetails {
-    const val compileSdk = 28
-    const val minSdk = 19
-    const val targetSdk = 28
-    const val versionCode = 1
-    const val versionName = "1.0.1"
-    const val libraryPackageName = "in.arunkumarsampath.transitionx"
-    val librarySample = "$libraryPackageName.sample"
-}
+//
+// object BuildDetails {
+//    const val compileSdk = 28
+//    const val minSdk = 19
+//    const val targetSdk = 28
+//    const val versionCode = 1
+//    const val versionName = "1.0.1"
+//    const val libraryPackageName = "in.arunkumarsampath.transitionx"
+//    val librarySample = "$libraryPackageName.sample"
+// }
 
 object Versions {
-    const val agp = "3.3.0-beta04"
     const val supportLib = "28.0.0"
     const val constraintLayout = "1.1.3"
     const val kotlin = "1.2.71"
-    const val androidKtx = "0.3"
-    const val archNavigation = "1.0.0-alpha06"
-    const val flexBox = "1.0.0"
+    const val androidKtx = "1.9.0"
+    const val archNavigation = "1.0.0-beta02"
+    const val flexBox = "3.0.0"
     const val timber = "4.7.1"
-    const val glide = "4.8.0"
+    const val glide = "4.13.2"
     const val adapterDelegates = "3.0.1"
 
     // Tests
@@ -51,13 +34,28 @@ object Versions {
     const val testRunner = "1.0.2"
     const val espresso = "3.0.2"
     const val roboElectric = "3.8"
-
 }
 
-
 object Dependencies {
-    // AGP
-    val agp = "com.android.tools.build:gradle:${Versions.agp}"
+
+//    const val androidGradle = "3.4.2"
+//    const val supportLibrary = "28.0.0"
+//    const val flexbox = "1.0.0"
+//    const val constraintLayout = "1.1.3"
+//    const val glide = "4.8.0"
+//    const val kotlin = "1.3.21"
+//    const val junit = "4.12"
+//    const val roboelectric = "4.2"
+//    const val timber = "4.6.0"
+//    const val rx = "2.1.13"
+//    const val rxKotlin = "2.2.0"
+//    const val rxAndroid = "2.0.1"
+//    const val rxBinding = "2.1.1"
+//    const val butterKnife = "8.8.1"
+//    const val ktx = "0.3"
+//    const val navigation = "1.0.0-beta02"
+//    const val adapterDelegates = "3.0.1"
+
     // Kotlin
     val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
     val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
