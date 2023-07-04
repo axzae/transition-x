@@ -1,35 +1,17 @@
-/*
- *
- * Copyright 2019 Arunkumar
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package `in`.arunkumarsampath.transitionx.transition.changecolor
 
-import `in`.arunkumarsampath.transitionx.evaluator.ArgbEvaluator
-import `in`.arunkumarsampath.transitionx.util.TransitionUtils
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
-import android.support.transition.Transition
-import android.support.transition.TransitionValues
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.transition.Transition
+import androidx.transition.TransitionValues
+import `in`.arunkumarsampath.transitionx.evaluator.ArgbEvaluator
+import `in`.arunkumarsampath.transitionx.util.TransitionUtils
 
 /**
  * This transition tracks changes during scene changes to the
@@ -47,16 +29,18 @@ class ChangeColor : Transition() {
         }
     }
 
-
     override fun captureStartValues(transitionValues: TransitionValues) =
-            captureValues(transitionValues)
+        captureValues(transitionValues)
 
     override fun captureEndValues(transitionValues: TransitionValues) =
-            captureValues(transitionValues)
+        captureValues(transitionValues)
 
     @SuppressLint("ObjectAnimatorBinding")
-    override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues?,
-                                endValues: TransitionValues?): Animator? {
+    override fun createAnimator(
+        sceneRoot: ViewGroup,
+        startValues: TransitionValues?,
+        endValues: TransitionValues?,
+    ): Animator? {
         if (startValues == null || endValues == null) {
             return null
         }
@@ -69,9 +53,9 @@ class ChangeColor : Transition() {
                 val finalColor = endBackground.color
                 endBackground.color = startBackground.color
                 backgroundAnimator = ValueAnimator.ofObject(
-                        ArgbEvaluator,
-                        startBackground.color,
-                        finalColor
+                    ArgbEvaluator,
+                    startBackground.color,
+                    finalColor,
                 ).apply {
                     addUpdateListener {
                         this.animatedValue?.let { color ->
@@ -88,9 +72,9 @@ class ChangeColor : Transition() {
             if (start != end) {
                 view.setTextColor(end)
                 textColorAnimator = ValueAnimator.ofObject(
-                        ArgbEvaluator,
-                        start,
-                        end
+                    ArgbEvaluator,
+                    start,
+                    end,
                 ).apply {
                     addUpdateListener {
                         this.animatedValue?.let { color ->

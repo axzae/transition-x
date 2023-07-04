@@ -1,50 +1,32 @@
-/*
- *
- * Copyright 2019 Arunkumar
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package `in`.arunkumarsampath.transitionx.sample.home.adapter.delegates
 
-import `in`.arunkumarsampath.transitionx.sample.R
-import `in`.arunkumarsampath.transitionx.sample.extensions.inflate
-import `in`.arunkumarsampath.transitionx.sample.home.adapter.SampleItem
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.navigation.navOptions
+import androidx.recyclerview.widget.RecyclerView
 import com.hannesdorfmann.adapterdelegates3.AbsListItemAdapterDelegate
+import `in`.arunkumarsampath.transitionx.sample.R
+import `in`.arunkumarsampath.transitionx.sample.extensions.inflate
+import `in`.arunkumarsampath.transitionx.sample.home.adapter.SampleItem
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.layout_sample_item_name_template.*
 
-class SampleTransitionItemDelegate
-    : AbsListItemAdapterDelegate<SampleItem.SampleTransitionItem, SampleItem, SampleTransitionItemDelegate.SamplesViewHolder>() {
+class SampleTransitionItemDelegate :
+    AbsListItemAdapterDelegate<SampleItem.SampleTransitionItem, SampleItem, SampleTransitionItemDelegate.SamplesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup) = SampleTransitionItemDelegate.SamplesViewHolder.create(parent)
 
     override fun isForViewType(
-            item: SampleItem,
-            items: MutableList<SampleItem>,
-            position: Int
+        item: SampleItem,
+        items: MutableList<SampleItem>,
+        position: Int,
     ) = item is SampleItem.SampleTransitionItem
 
     override fun onBindViewHolder(
-            item: SampleItem.SampleTransitionItem,
-            viewHolder: SampleTransitionItemDelegate.SamplesViewHolder,
-            payloads: MutableList<Any>
+        item: SampleItem.SampleTransitionItem,
+        viewHolder: SampleTransitionItemDelegate.SamplesViewHolder,
+        payloads: MutableList<Any>,
     ) = viewHolder.bindSample(item)
 
     class SamplesViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
@@ -54,9 +36,9 @@ class SampleTransitionItemDelegate
             with(containerView) {
                 setOnClickListener {
                     findNavController().navigate(
-                            sampleTransitionItem.navigationId,
-                            null,
-                            DEFAULT_NAV_OPTIONS
+                        sampleTransitionItem.navigationId,
+                        null,
+                        DEFAULT_NAV_OPTIONS,
                     )
                 }
             }

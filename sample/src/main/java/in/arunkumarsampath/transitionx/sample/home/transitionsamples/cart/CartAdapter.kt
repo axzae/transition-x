@@ -1,34 +1,16 @@
-/*
- *
- * Copyright 2019 Arunkumar
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package `in`.arunkumarsampath.transitionx.sample.home.transitionsamples.cart
 
-import `in`.arunkumarsampath.transitionx.sample.R
-import `in`.arunkumarsampath.transitionx.sample.extensions.inflate
-import `in`.arunkumarsampath.transitionx.sample.util.glide.GlideApp
-import android.support.v4.view.ViewCompat.setTransitionName
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.NO_POSITION
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat.setTransitionName
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.navOptions
+import `in`.arunkumarsampath.transitionx.sample.R
+import `in`.arunkumarsampath.transitionx.sample.extensions.inflate
+import `in`.arunkumarsampath.transitionx.sample.util.glide.GlideApp
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.layout_cart_list_item_template.*
 import java.util.*
@@ -37,19 +19,18 @@ import kotlin.collections.ArrayList
 class CartAdapter : RecyclerView.Adapter<CartAdapter.CartItemViewHolder>() {
 
     override fun onCreateViewHolder(
-            parent: ViewGroup,
-            itemType: Int
+        parent: ViewGroup,
+        itemType: Int,
     ) = CartItemViewHolder.create(parent)
 
     override fun getItemCount() = CART_ITEMS.size
 
     override fun onBindViewHolder(
-            holder: CartItemViewHolder,
-            position: Int
+        holder: CartItemViewHolder,
+        position: Int,
     ) = holder.bindCartItem(CART_ITEMS[position])
 
-    class CartItemViewHolder(override val containerView: View)
-        : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    class CartItemViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         init {
             with(containerView) {
@@ -67,20 +48,19 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartItemViewHolder>() {
             setTransitionName(cartItemName, cartItem.name)
             setTransitionName(cartPrice, cartItem.price)
             findNavController().navigate(
-                    R.id.cartDetailFragment,
-                    CartDetailFragmentArgs
-                            .Builder(cartItem)
-                            .build()
-                            .toBundle(),
-                    navOptions {
-
-                    },
-                    FragmentNavigator.Extras.Builder().run {
-                        addSharedElement(cartItemName, cartItem.name)
-                        addSharedElement(cartPrice, cartItem.price)
-                        addSharedElement(cartContentPreview, cartItem.cartImageTransitionName())
-                        build()
-                    }
+                R.id.cartDetailFragment,
+                CartDetailFragmentArgs
+                    .Builder(cartItem)
+                    .build()
+                    .toBundle(),
+                navOptions {
+                },
+                FragmentNavigator.Extras.Builder().run {
+                    addSharedElement(cartItemName, cartItem.name)
+                    addSharedElement(cartPrice, cartItem.price)
+                    addSharedElement(cartContentPreview, cartItem.cartImageTransitionName())
+                    build()
+                },
             )
         }
 
@@ -100,14 +80,14 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartItemViewHolder>() {
         private val random = Random()
 
         private val statuses = listOf(
-                "In Stock",
-                "Out of Stock",
-                "Only ${random.nextInt(5) + 1} in stock"
+            "In Stock",
+            "Out of Stock",
+            "Only ${random.nextInt(5) + 1} in stock",
         )
         private val items = listOf(
-                "Pencil" to R.drawable.ic_pencil,
-                "Tooth brush" to R.drawable.ic_tooth_brush,
-                "Coffee Mug" to R.drawable.ic_cofee_mug
+            "Pencil" to R.drawable.ic_pencil,
+            "Tooth brush" to R.drawable.ic_tooth_brush,
+            "Coffee Mug" to R.drawable.ic_cofee_mug,
         )
 
         private val CART_ITEMS: List<CartItem> by lazy {
@@ -115,10 +95,10 @@ class CartAdapter : RecyclerView.Adapter<CartAdapter.CartItemViewHolder>() {
                 repeat(10) {
                     val item = items[random.nextInt(items.size)]
                     list += CartItem(
-                            item.second,
-                            item.first,
-                            statuses[random.nextInt(statuses.size)],
-                            "$${random.nextInt(50)}.${random.nextInt(99)}"
+                        item.second,
+                        item.first,
+                        statuses[random.nextInt(statuses.size)],
+                        "$${random.nextInt(50)}.${random.nextInt(99)}",
                     )
                 }
             }

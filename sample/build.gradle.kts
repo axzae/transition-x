@@ -40,17 +40,17 @@ android {
 dependencies {
     implementation(project(":transitionx"))
 
-    implementation("androidx.core:core-ktx:${Versions.androidKtx}")
+    implementation("androidx.core:core-ktx:1.0.0")
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.21")
 
     // Support
-    implementation("com.android.support:design:${Versions.supportLib}")
-    implementation("com.android.support:cardview-v7:${Versions.supportLib}")
-    implementation("com.android.support:support-vector-drawable:${Versions.supportLib}")
-    implementation("com.android.support:recyclerview-v7:${Versions.supportLib}")
+    implementation("com.google.android.material:material:1.0.0")
+    implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.vectordrawable:vectordrawable:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.0.0")
 
-    implementation("com.android.support.constraint:constraint-layout:${Versions.constraintLayout}")
+    implementation("androidx.constraintlayout:constraintlayout:1.1.3")
 
     implementation("com.google.android.flexbox:flexbox:${Versions.flexBox}")
 
@@ -62,10 +62,10 @@ dependencies {
     kapt("com.github.bumptech.glide:compiler:${Versions.glide}")
 
     // Navigation
-    implementation("android.arch.navigation:navigation-fragment:${Versions.archNavigation}")
-    implementation("android.arch.navigation:navigation-ui:${Versions.archNavigation}")
-    implementation("android.arch.navigation:navigation-ui:${Versions.archNavigation}")
-    implementation("android.arch.navigation:navigation-ui-ktx:${Versions.archNavigation}")
+    implementation("androidx.navigation:navigation-fragment:2.0.0-rc02")
+    implementation("androidx.navigation:navigation-ui:2.0.0-rc02")
+    implementation("androidx.navigation:navigation-ui:2.0.0-rc02")
+    implementation("androidx.navigation:navigation-ui-ktx:2.0.0-rc02")
 
     // Adapter Delegates
     implementation("com.hannesdorfmann:adapterdelegates3:${Versions.adapterDelegates}")

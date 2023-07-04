@@ -1,21 +1,3 @@
-/*
- *
- * Copyright 2019 Arunkumar
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package `in`.arunkumarsampath.transitionx.transition.changetext
 
 import android.animation.Animator
@@ -23,12 +5,12 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
 import android.graphics.Color
-import android.support.transition.Transition
-import android.support.transition.TransitionListenerAdapter
-import android.support.transition.TransitionValues
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.transition.Transition
+import androidx.transition.TransitionListenerAdapter
+import androidx.transition.TransitionValues
 
 /**
  * This transition tracks changes to the text in TextView targets. If the text
@@ -68,15 +50,19 @@ class ChangeText : Transition() {
     }
 
     override fun captureStartValues(transitionValues: TransitionValues) =
-            captureValues(transitionValues)
+        captureValues(transitionValues)
 
     override fun captureEndValues(transitionValues: TransitionValues) =
-            captureValues(transitionValues)
+        captureValues(transitionValues)
 
-    override fun createAnimator(sceneRoot: ViewGroup, startValues: TransitionValues?,
-                                endValues: TransitionValues?): Animator? {
+    override fun createAnimator(
+        sceneRoot: ViewGroup,
+        startValues: TransitionValues?,
+        endValues: TransitionValues?,
+    ): Animator? {
         if (startValues == null || endValues == null ||
-                startValues.view !is TextView || endValues.view !is TextView) {
+            startValues.view !is TextView || endValues.view !is TextView
+        ) {
             return null
         }
         val view = endValues.view as TextView
@@ -131,17 +117,19 @@ class ChangeText : Transition() {
                 endColor = 0
                 startColor = endColor
                 anim = ValueAnimator.ofFloat(0F, 1F).apply {
-                    addListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            if (startText == view.text) {
-                                // Only set if it hasn't been changed since anim started
-                                view.text = endText
-                                if (view is EditText) {
-                                    setSelection(view, endSelectionStart, endSelectionEnd)
+                    addListener(
+                        object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator) {
+                                if (startText == view.text) {
+                                    // Only set if it hasn't been changed since anim started
+                                    view.text = endText
+                                    if (view is EditText) {
+                                        setSelection(view, endSelectionStart, endSelectionEnd)
+                                    }
                                 }
                             }
-                        }
-                    })
+                        },
+                    )
                 }
             } else {
                 startColor = (startVals[PROPNAME_TEXT_COLOR] as Int?)!!
@@ -155,19 +143,21 @@ class ChangeText : Transition() {
                             val currAlpha = animation.animatedValue as Int
                             view.setTextColor(currAlpha shl 24 or (startColor and 0xffffff))
                         }
-                        addListener(object : AnimatorListenerAdapter() {
-                            override fun onAnimationEnd(animation: Animator) {
-                                if (startText == view.text) {
-                                    // Only set if it hasn't been changed since anim started
-                                    view.text = endText
-                                    if (view is EditText) {
-                                        setSelection(view, endSelectionStart, endSelectionEnd)
+                        addListener(
+                            object : AnimatorListenerAdapter() {
+                                override fun onAnimationEnd(animation: Animator) {
+                                    if (startText == view.text) {
+                                        // Only set if it hasn't been changed since anim started
+                                        view.text = endText
+                                        if (view is EditText) {
+                                            setSelection(view, endSelectionStart, endSelectionEnd)
+                                        }
                                     }
+                                    // restore opaque alpha and correct end color
+                                    view.setTextColor(endColor)
                                 }
-                                // restore opaque alpha and correct end color
-                                view.setTextColor(endColor)
-                            }
-                        })
+                            },
+                        )
                     }
                 }
                 if (changeBehavior == CHANGE_BEHAVIOR_OUT_IN || changeBehavior == CHANGE_BEHAVIOR_IN) {
@@ -176,12 +166,14 @@ class ChangeText : Transition() {
                             val currAlpha = animation.animatedValue as Int
                             view.setTextColor(currAlpha shl 24 or (endColor and 0xffffff))
                         }
-                        addListener(object : AnimatorListenerAdapter() {
-                            override fun onAnimationCancel(animation: Animator) {
-                                // restore opaque alpha and correct end color
-                                view.setTextColor(endColor)
-                            }
-                        })
+                        addListener(
+                            object : AnimatorListenerAdapter() {
+                                override fun onAnimationCancel(animation: Animator) {
+                                    // restore opaque alpha and correct end color
+                                    view.setTextColor(endColor)
+                                }
+                            },
+                        )
                     }
                 }
                 if (outAnim != null && inAnim != null) {
@@ -249,6 +241,7 @@ class ChangeText : Transition() {
          * the transition ends. This is the default behavior.
          */
         const val CHANGE_BEHAVIOR_KEEP = 0
+
         /**
          * Flag specifying that the text changing animation should first fade
          * out the original text completely. The new text is set on the target
@@ -258,6 +251,7 @@ class ChangeText : Transition() {
          * transitions to be run sequentially or in parallel with these fades.
          */
         const val CHANGE_BEHAVIOR_OUT = 1
+
         /**
          * Flag specifying that the text changing animation should fade in the
          * end text into the affected target view(s). This transition is typically
@@ -266,6 +260,7 @@ class ChangeText : Transition() {
          * a sequence to fade out, then resize the view, then fade in.
          */
         const val CHANGE_BEHAVIOR_IN = 2
+
         /**
          * Flag specifying that the text changing animation should first fade
          * out the original text completely and then fade in the
@@ -274,9 +269,9 @@ class ChangeText : Transition() {
         const val CHANGE_BEHAVIOR_OUT_IN = 3
 
         private val TRANSITION_PROPERTIES = arrayOf(
-                PROPNAME_TEXT,
-                PROPNAME_TEXT_SELECTION_START,
-                PROPNAME_TEXT_SELECTION_END
+            PROPNAME_TEXT,
+            PROPNAME_TEXT_SELECTION_START,
+            PROPNAME_TEXT_SELECTION_END,
         )
     }
 }

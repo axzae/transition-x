@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         minSdk = Setup.minSdk
-        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     kotlinOptions {
@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}")
-    implementation("com.android.support:transition:${Versions.supportLib}")
-    implementation("com.android.support:interpolator:${Versions.supportLib}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.21")
+    implementation("androidx.transition:transition:1.0.0")
+    implementation("androidx.interpolator:interpolator:1.0.0")
 }

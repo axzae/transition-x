@@ -1,27 +1,26 @@
 package `in`.arunkumarsampath.transitionx.sample.home.transitionsamples
 
-import `in`.arunkumarsampath.transitionx.evaluator.ArgbEvaluator
-import `in`.arunkumarsampath.transitionx.prepareTransition
-import `in`.arunkumarsampath.transitionx.sample.R
-import `in`.arunkumarsampath.transitionx.sample.extensions.resolveColorRes
-import `in`.arunkumarsampath.transitionx.transitionSet
 import android.animation.Animator
 import android.animation.ValueAnimator
 import android.content.res.ColorStateList
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.support.annotation.ColorInt
-import android.support.annotation.ColorRes
-import android.support.transition.Transition
-import android.support.transition.TransitionValues
-import android.support.v4.graphics.ColorUtils.setAlphaComponent
-import android.support.v4.widget.ImageViewCompat
-import android.support.v7.widget.AppCompatImageView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.core.graphics.ColorUtils.setAlphaComponent
 import androidx.core.view.isGone
+import androidx.core.widget.ImageViewCompat
+import androidx.transition.Transition
+import androidx.transition.TransitionValues
+import `in`.arunkumarsampath.transitionx.evaluator.ArgbEvaluator
+import `in`.arunkumarsampath.transitionx.prepareTransition
+import `in`.arunkumarsampath.transitionx.sample.R
+import `in`.arunkumarsampath.transitionx.sample.extensions.resolveColorRes
+import `in`.arunkumarsampath.transitionx.transitionSet
 import kotlinx.android.synthetic.main.layout_animated_bottom_navigation_content.*
 import kotlin.LazyThreadSafetyMode.NONE
 
@@ -34,10 +33,10 @@ class AnimatedBottomNavigationFragment : BaseSampleFragment() {
      * Data structure for holding components in each bottom nav item.
      */
     private data class BottomNavigationItem(
-            val icon: AppCompatImageView,
-            val text: TextView,
-            val bg: View,
-            @param:ColorRes val colorRes: Int
+        val icon: AppCompatImageView,
+        val text: TextView,
+        val bg: View,
+        @param:ColorRes val colorRes: Int,
     )
 
     /**
@@ -45,10 +44,10 @@ class AnimatedBottomNavigationFragment : BaseSampleFragment() {
      */
     private val navItems by lazy(NONE) {
         sequenceOf(
-                BottomNavigationItem(home, homeText, homeBg, R.color.bottom_nav_home),
-                BottomNavigationItem(likes, likesText, likesBg, R.color.bottom_nav_likes),
-                BottomNavigationItem(search, searchText, searchBg, R.color.bottom_nav_search),
-                BottomNavigationItem(about, aboutText, aboutBg, R.color.bottom_nav_about)
+            BottomNavigationItem(home, homeText, homeBg, R.color.bottom_nav_home),
+            BottomNavigationItem(likes, likesText, likesBg, R.color.bottom_nav_likes),
+            BottomNavigationItem(search, searchText, searchBg, R.color.bottom_nav_search),
+            BottomNavigationItem(about, aboutText, aboutBg, R.color.bottom_nav_about),
         )
     }
 
@@ -56,7 +55,6 @@ class AnimatedBottomNavigationFragment : BaseSampleFragment() {
         super.onViewCreated(view, savedInstanceState)
         bindListeners()
     }
-
 
     /**
      * A transition instance that animates movement, appear and disappear like [AutoTransition] does
@@ -99,16 +97,16 @@ class AnimatedBottomNavigationFragment : BaseSampleFragment() {
 
                 // Reset all other items
                 navItems.filter { it != navItem }
-                        .forEach { otherNavItem ->
-                            otherNavItem.run {
-                                icon.setImageTint(android.R.color.black)
-                                text.run {
-                                    setTextColor(context.resolveColorRes(android.R.color.black))
-                                    isGone = true
-                                }
-                                bg.isGone = true
+                    .forEach { otherNavItem ->
+                        otherNavItem.run {
+                            icon.setImageTint(android.R.color.black)
+                            text.run {
+                                setTextColor(context.resolveColorRes(android.R.color.black))
+                                isGone = true
                             }
+                            bg.isGone = true
                         }
+                    }
 
                 // Apply changes to current item
                 navItem.run {
@@ -144,17 +142,16 @@ class AnimatedBottomNavigationFragment : BaseSampleFragment() {
         }
 
         override fun captureStartValues(transitionValues: TransitionValues) =
-                captureValues(transitionValues)
+            captureValues(transitionValues)
 
         override fun captureEndValues(transitionValues: TransitionValues) =
-                captureValues(transitionValues)
+            captureValues(transitionValues)
 
         override fun createAnimator(
-                sceneRoot: ViewGroup,
-                startValues: TransitionValues?,
-                endValues: TransitionValues?
+            sceneRoot: ViewGroup,
+            startValues: TransitionValues?,
+            endValues: TransitionValues?,
         ): Animator? {
-
             if (startValues == null || endValues == null) {
                 return null
             }
@@ -165,9 +162,9 @@ class AnimatedBottomNavigationFragment : BaseSampleFragment() {
 
             if (startTint != -1 && endTint != -1 && imageView != null) {
                 return ValueAnimator.ofObject(
-                        ArgbEvaluator,
-                        startTint,
-                        endTint
+                    ArgbEvaluator,
+                    startTint,
+                    endTint,
                 ).apply {
                     addUpdateListener { animation ->
                         animation.animatedValue?.let { color ->
@@ -193,8 +190,8 @@ class AnimatedBottomNavigationFragment : BaseSampleFragment() {
 
         private fun AppCompatImageView.setImageTint(@ColorRes colorRes: Int) {
             ImageViewCompat.setImageTintList(
-                    this,
-                    ColorStateList.valueOf(context.resolveColorRes(colorRes))
+                this,
+                ColorStateList.valueOf(context.resolveColorRes(colorRes)),
             )
         }
     }

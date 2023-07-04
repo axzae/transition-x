@@ -1,35 +1,16 @@
-/*
- *
- * Copyright 2019 Arunkumar
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package `in`.arunkumarsampath.transitionx.sample.home.transitionsamples
 
-
-import `in`.arunkumarsampath.transitionx.prepareTransition
-import `in`.arunkumarsampath.transitionx.sample.R
-import `in`.arunkumarsampath.transitionx.sample.extensions.removeCallbacks
-import `in`.arunkumarsampath.transitionx.transition.changetext.ChangeText
 import android.os.Bundle
-import android.support.constraint.ConstraintSet
 import android.view.View
+import androidx.constraintlayout.ConstraintSet
 import androidx.core.view.isGone
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
+import `in`.arunkumarsampath.transitionx.prepareTransition
+import `in`.arunkumarsampath.transitionx.sample.R
+import `in`.arunkumarsampath.transitionx.sample.extensions.removeCallbacks
+import `in`.arunkumarsampath.transitionx.transition.changetext.ChangeText
 import kotlinx.android.synthetic.main.layout_material_card_transformation.*
 
 class MaterialCardTransformationFragment : BaseSampleFragment() {
@@ -62,20 +43,21 @@ class MaterialCardTransformationFragment : BaseSampleFragment() {
 
     private fun setupViews() {
         requestManager
-                .load(R.drawable.ic_girl)
-                .transition(withCrossFade())
-                .apply(RequestOptions().circleCrop())
-                .into(avatar)
-        listOf(R.drawable.ic_artic_1 to image1,
-                R.drawable.ic_artic_2 to image2,
-                R.drawable.ic_artic_3 to image3,
-                R.drawable.ic_artic_4 to image4,
-                R.drawable.ic_artic_5 to image5
+            .load(R.drawable.ic_girl)
+            .transition(withCrossFade())
+            .apply(RequestOptions().circleCrop())
+            .into(avatar)
+        listOf(
+            R.drawable.ic_artic_1 to image1,
+            R.drawable.ic_artic_2 to image2,
+            R.drawable.ic_artic_3 to image3,
+            R.drawable.ic_artic_4 to image4,
+            R.drawable.ic_artic_5 to image5,
         ).forEach { (drawable, image) ->
             requestManager.load(drawable)
-                    .transition(withCrossFade())
-                    .apply(RequestOptions().centerCrop())
-                    .into(image)
+                .transition(withCrossFade())
+                .apply(RequestOptions().centerCrop())
+                .into(image)
         }
         with(collapseButton) {
             setOnClickListener {

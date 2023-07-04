@@ -57,8 +57,8 @@ object Dependencies {
 //    const val adapterDelegates = "3.0.1"
 
     // Kotlin
-    val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
-    val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib:1.8.21"
+    val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.21"
 
     // Support
     val appCompat = "com.android.support:appcompat-v7:${Versions.supportLib}"
