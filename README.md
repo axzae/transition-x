@@ -37,7 +37,7 @@ dependencies {
 
 - [Usage](https://github.com/arunkumar9t2/transition-x#introduction)
 
-[mavencentral]: https://central.sonatype.com/artifact/com.axzae/swipelayout
+[mavencentral]: https://central.sonatype.com/artifact/com.axzae/transition-x
 [actions]: https://github.com/axzae/transition-x/actions
 [releases]: https://github.com/axzae/transition-x/releases
 [jetifier]: https://developer.android.com/tools/jetifier
